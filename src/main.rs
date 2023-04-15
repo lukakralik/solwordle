@@ -5,7 +5,6 @@ use std::{
     env::current_dir,
     io::stdin,
 };
-use rand::Rng;
 
 pub mod utils;
 pub mod levenshtein;

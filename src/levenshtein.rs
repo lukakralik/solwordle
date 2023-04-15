@@ -34,3 +34,6 @@ pub fn levenshtein_distance(s: &str, t: &str) -> usize {
 
     distance_matrix[s_len][t_len]
 }
+
+// Time complexity: O(m*n)
+// Auxiliary complexity: O(m*n)
