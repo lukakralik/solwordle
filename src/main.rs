@@ -11,5 +11,6 @@ pub mod levenshtein;
 pub use crate::utils::*;
 
 fn main() {
-    let data = utils::import_dataset("../words/english.txt");
+    let data = utils::import_dataset("../words/test.txt");
+    println!("{:#?}", data);
 }
