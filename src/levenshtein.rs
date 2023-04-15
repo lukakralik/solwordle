@@ -1,21 +1,36 @@
-use std::cmp::min;
+pub fn levenshtein_distance(s: &str, t: &str) -> usize {
+    let s_len = s.chars().count();
+    let t_len = t.chars().count();
 
-pub fn edit_distance(a: &str, b: &str, m: u32, n:u32) -> u32 {
-    if m == 0 {
-        return n;
+    if s_len == 0 {
+        return t_len;
     }
 
-    if n == 0 {
-        return m;
+    if t_len == 0 {
+        return s_len;
     }
 
-    if a.chars().nth((m-1) as usize).unwrap() == b.chars().nth((n-1) as usize).unwrap() {
-        return edit_distance(a, b, m-1, n-1);
+    let mut distance_matrix = vec![vec![0; t_len + 1]; s_len + 1];
+    // 2D array of costs
+
+    for i in 0..=s_len {
+        distance_matrix[i][0] = i;
     }
 
-    return 1 + min(
-               min(
-                   edit_distance(a, b, m, n-1),
-                   edit_distance(a, b, m-1, n)),
-                   edit_distance(a, b, m-1, n-1));
+    for j in 0..=t_len {
+        distance_matrix[0][j] = j;
+    }
+
+    for (i, s_char) in s.chars().enumerate() {
+        for (j, t_char) in t.chars().enumerate() {
+            let cost = if s_char == t_char { 0 } else { 1 };
+
+            distance_matrix[i + 1][j + 1] = std::cmp::min(
+                distance_matrix[i][j + 1] + 1,
+                std::cmp::min(distance_matrix[i + 1][j] + 1, distance_matrix[i][j] + cost),
+            );
+        }
+    }
+
+    distance_matrix[s_len][t_len]
 }
