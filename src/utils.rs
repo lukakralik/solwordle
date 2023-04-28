@@ -2,6 +2,7 @@ use std::fs;
 use std::str;
 use std::env;
 
+// load all the words of the given length into a vector
 pub fn import_dataset(path: &str, des_len: u8) -> Vec<String> {
     let mut abs_path = env::current_dir()
         .expect("Failed to get current directory");
@@ -20,18 +21,12 @@ pub fn import_dataset(path: &str, des_len: u8) -> Vec<String> {
     to_upper(words)
 }
 
+// check if string contains the given symbol
 pub fn contains(symbol: char, sequence: &str) -> bool {
-    for c in sequence.chars() {
-        if c == symbol {
-            return true
-        }
-        else {
-            continue
-        }
-    }
-    false
+    sequence.chars().any(|c| c == symbol)
 }
 
+// turn all the elements of the vector uppercase
 fn to_upper(list: Vec<String>) -> Vec<String> {
     let mut vec = list;
     for s in vec.iter_mut() {
