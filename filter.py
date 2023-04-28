@@ -1,4 +1,4 @@
-from sys import stdin
+from sys import stdin, argv
 import re
 
 exclude = ['%', '#', '*', '(', ')', ',', '!', '.', '$', '-', '_', '/', '\'']+list("&")
@@ -12,8 +12,9 @@ def check(s: str) -> bool:
     return True
 
 def main():
+    req_len = int(argv[1]) + 1
     for line in stdin:
-        if check(str(line)) and len(line) == 6:
+        if check(str(line)) and len(line) == req_len:
             print(line
                   .strip()
                   .upper()
