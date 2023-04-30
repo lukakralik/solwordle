@@ -13,8 +13,8 @@ mod tests {
         let mut path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
         // construcing a relative path from PathBuff
         path.push("words/test.txt");
-
-        let result = crate::utils::import_dataset(&path.to_str().unwrap(), 4);
+        
+        let result = crate::utils::import_dataset("test", 0);
         assert_eq!(expected, result);
-}
+    }
 }
