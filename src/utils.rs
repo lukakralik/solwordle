@@ -40,7 +40,7 @@ pub fn contains(symbol: char, sequence: &str) -> bool {
 }
 
 // turn all the elements of the vector uppercase
-fn to_upper(list: Vec<String>) -> Vec<String> {
+pub fn to_upper(list: Vec<String>) -> Vec<String> {
     let mut vec = list;
     for s in vec.iter_mut() {
         *s = s.to_uppercase();

@@ -74,5 +74,5 @@ pub fn suitable_sequences(green: String, yellow: Vec<String>, gray: Vec<String>,
 
         suiting.push(word.to_owned());
     }
-    suiting
+    to_upper(suiting)
 }
