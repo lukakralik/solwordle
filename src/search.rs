@@ -1,4 +1,5 @@
 use crate::utils::*;
+use regex::Regex;
 
 pub fn levenshtein_distance(s: &str, t: &str) -> usize {
     let s_len = s.chars().count();
@@ -75,4 +76,5 @@ pub fn suitable_sequences(green: String, yellow: Vec<String>, gray: Vec<String>,
         suiting.push(word.to_owned());
     }
     to_upper(suiting)
+    // regex alternative: /\bG\wA*E\wT\b/
 }
