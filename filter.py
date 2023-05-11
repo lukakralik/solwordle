@@ -12,6 +12,13 @@ def check(s: str) -> bool:
     return True
 
 def main():
+    """
+    USAGE:
+
+    python filter.py $length$ < $dictionary location$ > $output location$
+
+    dictionaries are located in /words under in format <language>(len).txt
+    """
     req_len = int(argv[1]) + 1
     for line in stdin:
         if check(str(line)) and len(line) == req_len:
