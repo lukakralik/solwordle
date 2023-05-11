@@ -85,14 +85,14 @@ pub fn filter_words(words: Vec<String>, guessed_word: &str, included_letters: &[
     let mut filtered_words = Vec::new();
 
     // regex pattern
-    let regex_str = guessed_word.replace("-", "[A-Z]");
+    let regex_str = guessed_word
+        .chars()
+        .map(|c| if c == '-' { String::from(".") } else {String::from(c)})
+        .collect::<Vec<_>>()
+        .join("");
     let regex = Regex::new(&regex_str).unwrap();
 
     for word in words {
-        // this situation shouldn't be reached if the correct data was passed
-        if word.len() != guessed_word.len() {
-            continue;
-        }
         // doesn't fit in the RegEx pattern
         if !regex.is_match(word.as_ref()) {
             continue;
@@ -108,11 +108,10 @@ pub fn filter_words(words: Vec<String>, guessed_word: &str, included_letters: &[
         if !all_incl_letters {
             continue;
         }
-        // erase the word if it contains forbidden characters
-        for &letter in excluded_letters {
-            if word.contains(letter) {
-                continue;
-            }
+        // check if word contains any excluded letter
+        let contains_excluded_letters = excluded_letters.iter().any(|&letter| word.contains(letter));
+        if contains_excluded_letters {
+            continue;
         }
         filtered_words.push(word.to_owned());
     }

@@ -13,14 +13,14 @@ pub mod utils;
 pub mod search;
 
 fn main() {
-    let data = import_dataset("test", 0);
+    let data = import_dataset("english", 8);
     let data2 = data.clone();
-    println!("{:#?}", data);
+    //println!("{:#?}", data);
 
-    let res = suitable_sequences(String::from("G*T*"), vec![String::from("A"), String::from("E")], vec![String::from("B")], data);
-    println!(" res {:?}", res);
+    //let res = suitable_sequences(String::from("G*T*"), vec![String::from("A"), String::from("E")], vec![String::from("B")], data);
+    //println!(" res {:?}", res);
     
     // add testcase for the filter alternative
-    let result = filter_words(data2, "G-T-", &['A', 'T'], &['X', 'Y']);
+    let result = filter_words(data2, "---L----", &['E', 'A', 'O', 'P'], &['S', 'C']);
     println!("{:#?}", result);
 }
