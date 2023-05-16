@@ -40,5 +40,28 @@ function moveCursor(event) {
     }
 }
 
+// ran each time check button is pressed, process the existing results
+// go to the next line and continue
+function checkGuess() {
+    var wordLength = document.getElementById("word-length-input").value;
+
+    // create a div for the new entry
+    var lineDiv = document.createElement("div");
+
+    // generate the input boxes
+    for (var i = 0; i < wordLength; i++) {
+        var input = document.createElement("input");
+        input.className = "word-box";
+        input.type = "text";
+        input.maxLength = 1;
+        input.addEventListener("input", moveCursor);
+
+        lineDiv.appendChild(input);
+    }
+
+    var boxContainer = document.getElementById("word-box-container");
+    boxContainer.appendChild(lineDiv);
+}
+
 // boxes from the default value
 generateBoxes();

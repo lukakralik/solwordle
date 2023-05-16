@@ -9,11 +9,11 @@
     <h1>SolWordle</h1>
     <div class="word-length">
         <label for="word-length-input">Word Length:</label>
-        <input type="number" id="word-length-input" min="2" max="8" value="5" step="1" oninput="generateBoxes()">
+        <input type="number" id="word-length-input" min="2" max="8" step="1" oninput="generateBoxes()">
     </div>
     <div id="word-box-container"></div>
     <div>
-        <!-- call the aws lambda POST method from checkGuess -->
+        <!-- TODO: call the aws lambda POST method from checkGuess -->
         <button class="button" onclick="checkGuess()">Check</button>
     </div>
 </body>

@@ -13,17 +13,42 @@ h1 {
 
 .word-length input[type="number"] {
     width: 40px;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f1f1f1;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.word-length input[type="number"]:focus {
+    background-color: #e0e0e0;
+    outline: none;
 }
 
 .word-box {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border: 1px solid #ccc;
+    border: none;
+    background-color: #d1d1d1;
     text-align: center;
-    margin: 2px;
+    margin: 5px; /* Adjust the margin as desired */
     font-size: 16px;
+    color: #333;
+    border-radius: 10%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
 }
+
+.word-box:focus {
+    background-color: #a6a6a6;
+    outline: none;
+}
+
 
 .button {
     padding: 10px 20px;
