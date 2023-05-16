@@ -33,6 +33,9 @@ function moveCursor(event) {
         }
     }
     else if (input.value.length === 1) {
+        // Capitalize the letter
+        input.value = input.value.toUpperCase();
+
         var nextInput = input.nextElementSibling;
         if (nextInput !== null) {
             nextInput.focus();
