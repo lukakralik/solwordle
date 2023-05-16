@@ -3,7 +3,7 @@ function generateBoxes() {
     var boxContainer = document.getElementById("word-box-container");
     boxContainer.innerHTML = "";
 
-    // dynamically update the number of boxes when the lenght is updated
+    // dynamically update the number of boxes when the length is updated
     for (var i = 0; i < wordLength; i++) {
         var input = document.createElement("input");
         input.className = "word-box";
@@ -26,13 +26,11 @@ function moveCursor(event) {
         if (previousInput !== null) {
             previousInput.value = "";
             previousInput.focus();
-        }
-        else {
+        } else {
             var allInputs = document.getElementsByClassName("word-box");
             allInputs[allInputs.length - 1].focus();
         }
-    }
-    else if (input.value.length === 1) {
+    } else if (input.value.length === 1) {
         // Capitalize the letter
         input.value = input.value.toUpperCase();
 
@@ -43,7 +41,7 @@ function moveCursor(event) {
     }
 }
 
-// ran each time check button is pressed, process the existing results
+// ran each time the check button is pressed, process the existing results
 // go to the next line and continue
 function checkGuess() {
     var wordLength = document.getElementById("word-length-input").value;
@@ -64,6 +62,10 @@ function checkGuess() {
 
     var boxContainer = document.getElementById("word-box-container");
     boxContainer.appendChild(lineDiv);
+
+    // focus on the first box in the new line
+    var firstInput = lineDiv.getElementsByTagName("input")[0];
+    firstInput.focus();
 }
 
 // boxes from the default value
