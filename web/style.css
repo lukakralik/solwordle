@@ -75,3 +75,13 @@ h1 {
     align-items: center;
     margin: 5px;
 }
+
+.input-pair {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.line {
+    display: flex;
+}
