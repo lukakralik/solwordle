@@ -1,6 +1,7 @@
 var rowCounter = 1;
 
 function generateBoxes() {
+    // get the word length input value
     var wordLength = document.getElementById("word-length-input").value;
     var boxContainer = document.getElementById("word-box-container");
     boxContainer.innerHTML = "";
@@ -13,13 +14,12 @@ function generateBoxes() {
         input.maxLength = 1;
         input.addEventListener("input", moveCursor);
 
-
         // create new color input for each letter and assign gray as the default color
         var colorInput = document.createElement("input");
         colorInput.className = "color-picker";
         colorInput.type = "color";
         colorInput.setAttribute("list", "color-options");
-        colorInput.value = "#A4AEC4";
+        colorInput.value = "#a4aec4";
 
         // create a pair of inputs
         var boxWrapper = document.createElement("div");
@@ -31,6 +31,7 @@ function generateBoxes() {
     }
 }
 
+// TODO: move cursor to the next letter in the row after entering the current one
 function moveCursor(event) {
     var input = event.target;
     var keyCode = event.keyCode || event.which;
@@ -53,14 +54,16 @@ function moveCursor(event) {
     }
 }
 
+// check the correctness of the last guess and generate new line
 function checkGuess() {
     var wordLength = document.getElementById("word-length-input").value;
     var boxContainer = document.getElementById("word-box-container");
 
+    // create a new line container for the current pair
     var lineDiv = document.createElement("div");
     lineDiv.className = "line";
 
-    // Generate the input boxes and color pickers
+    // generate the input boxes and color pickers
     for (var i = 0; i < wordLength; i++) {
         var input = document.createElement("input");
         input.className = "word-box";
@@ -72,35 +75,39 @@ function checkGuess() {
         colorInput.className = "color-picker";
         colorInput.type = "color";
         colorInput.setAttribute("list", "color-options");
-        colorInput.value = "#A4AEC4";
+        colorInput.value = "#a4aec4";
 
         var boxWrapper = document.createElement("div");
         boxWrapper.className = "word-box-wrapper";
         boxWrapper.appendChild(input);
         boxWrapper.appendChild(colorInput);
-        boxWrapper.classList.add("input-pair");
 
         lineDiv.appendChild(boxWrapper);
     }
 
-    boxContainer.appendChild(lineDiv);
+    // insert the new line container below the current pair
+    var existingLines = document.getElementsByClassName("line");
+    if (existingLines.length > 0) {
+        boxContainer.insertBefore(lineDiv, existingLines[existingLines.length - 1].nextSibling);
+    } else {
+        boxContainer.appendChild(lineDiv);
+    }
 
-    // Focus on the first input of the new line
+    // focus on the first input of the new line
     var firstInput = lineDiv.querySelector(".word-box");
     firstInput.focus();
 
-    // Reset the input values and color pickers for the next line
+    // reset the input values and color pickers for the next line
     var wordBoxes = lineDiv.querySelectorAll(".word-box");
     var colorPickers = lineDiv.querySelectorAll(".color-picker");
 
+    // TODO: find a better way to construct an array from the paired letters and colors
     Array.from(wordBoxes).forEach(input => (input.value = ""));
-    Array.from(colorPickers).forEach(
-        colorPicker => (colorPicker.value = "#A4AEC4")
-    );
+    Array.from(colorPickers).forEach(colorPicker => (colorPicker.value = "#a4aec4"));
 
-    // TODO: Process the guessed word and colors here
+    // TODO: process the guessed word and colors here
     processGuess(wordBoxes, colorPickers);
-}   
+}
 
-// Call the generateBoxes() function initially
+// call the generateBoxes() function initially
 generateBoxes();
