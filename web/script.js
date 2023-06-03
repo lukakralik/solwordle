@@ -1,9 +1,11 @@
+var rowCounter = 1;
+
 function generateBoxes() {
     var wordLength = document.getElementById("word-length-input").value;
     var boxContainer = document.getElementById("word-box-container");
     boxContainer.innerHTML = "";
 
-    // dynamically update the number of boxes when the length is updated
+    // dynamically update the number of boxes and color pickers when the length is updated
     for (var i = 0; i < wordLength; i++) {
         var input = document.createElement("input");
         input.className = "word-box";
@@ -11,12 +13,24 @@ function generateBoxes() {
         input.maxLength = 1;
         input.addEventListener("input", moveCursor);
 
-        boxContainer.appendChild(input);
+
+        // create new color input for each letter and assign gray as the default color
+        var colorInput = document.createElement("input");
+        colorInput.className = "color-picker";
+        colorInput.type = "color";
+        colorInput.setAttribute("list", "color-options");
+        colorInput.value = "#A4AEC4";
+
+        // create a pair of inputs
+        var boxWrapper = document.createElement("div");
+        boxWrapper.className = "word-box-wrapper";
+        boxWrapper.appendChild(input);
+        boxWrapper.appendChild(colorInput);
+
+        boxContainer.appendChild(boxWrapper);
     }
 }
 
-// move the cursor to the next box after a letter is entered
-// move one box back in case backspace is pressed
 function moveCursor(event) {
     var input = event.target;
     var keyCode = event.keyCode || event.which;
@@ -31,9 +45,7 @@ function moveCursor(event) {
             allInputs[allInputs.length - 1].focus();
         }
     } else if (input.value.length === 1) {
-        // Capitalize the letter
         input.value = input.value.toUpperCase();
-
         var nextInput = input.nextElementSibling;
         if (nextInput !== null) {
             nextInput.focus();
@@ -41,15 +53,13 @@ function moveCursor(event) {
     }
 }
 
-// ran each time the check button is pressed, process the existing results
-// go to the next line and continue
 function checkGuess() {
     var wordLength = document.getElementById("word-length-input").value;
+    var boxContainer = document.getElementById("word-box-container");
 
-    // create a div for the new entry
     var lineDiv = document.createElement("div");
 
-    // generate the input boxes
+    // Generate the input boxes and color pickers
     for (var i = 0; i < wordLength; i++) {
         var input = document.createElement("input");
         input.className = "word-box";
@@ -57,16 +67,23 @@ function checkGuess() {
         input.maxLength = 1;
         input.addEventListener("input", moveCursor);
 
-        lineDiv.appendChild(input);
+        var colorInput = document.createElement("input");
+        colorInput.className = "color-picker";
+        colorInput.type = "color";
+
+        var boxWrapper = document.createElement("div");
+        boxWrapper.appendChild(input);
+        boxWrapper.appendChild(colorInput);
+
+        lineDiv.appendChild(boxWrapper);
     }
 
-    var boxContainer = document.getElementById("word-box-container");
     boxContainer.appendChild(lineDiv);
 
-    // focus on the first box in the new line
-    var firstInput = lineDiv.getElementsByTagName("input")[0];
+    // Focus on the first input of the new line
+    var firstInput = lineDiv.querySelector(".word-box");
     firstInput.focus();
 }
 
-// boxes from the default value
+// Call the generateBoxes() function initially
 generateBoxes();
