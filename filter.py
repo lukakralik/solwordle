@@ -15,9 +15,10 @@ def main():
     """
     USAGE:
 
-    python filter.py $length$ < $dictionary location$ > $output location$
+    python filter.py $length < $dictionary_location > $output location
 
     dictionaries are located in /words under in format <language>(len).txt
+    the list of words should contain each single word on a single line uppercase/lowercase/mixed without any special characters
     """
     req_len = int(argv[1]) + 1
     for line in stdin:
