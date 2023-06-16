@@ -46,22 +46,26 @@ function moveCursor(event) {
 // go to the next line and continue
 async function checkGuess() {
     var wordLength = document.getElementById("word-length-input").value;
-    var slovo = "";
-    var barvy = "";
-    for(i = 0; i < wordLength; i++) 
-    {
-        slovo = slovo + Array.from(document.getElementById("box" + i).value)[0];
-        barvy = barvy + Array.from(document.getElementById("box" + i).value)[1];
+    var word = "";
+    var colors = "";
+	var language = document.getElementById("lang").value;
+    for(i = 0; i < wordLength; i++)  {
+        word = word + Array.from(document.getElementById("box" + i).value)[0];
+        colors = colors + Array.from(document.getElementById("box" + i).value)[1];
     }
-    console.log(slovo);
-    console.log(barvy);
-    data = {"slovo": slovo, "barvy": barvy};
+    console.log(word);
+    console.log(colors);
+    data = {
+		"word": word,
+		"colors": colors,
+		"len": wordLength,
+		"lang": language
+	};
 
-    for(i = 0; i < wordLength; i++)
-    {
+    for(i = 0; i < wordLength; i++) {
         document.getElementById("box" + i).value = "";
     }
-    
+
     const response = await fetch("www.solwordle.org", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.,
         headers: {
@@ -69,6 +73,8 @@ async function checkGuess() {
         },
         body: JSON.stringify(data), // body data type must match "Content-Type" header
       });
+	document.getElementById("answersparagraph").value = response.body;
 }
+
 // boxes from the default value
 generateBoxes();
