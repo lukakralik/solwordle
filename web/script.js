@@ -7,6 +7,7 @@ function generateBoxes() {
     for (var i = 0; i < wordLength; i++) {
         var input = document.createElement("input");
         input.className = "word-box";
+        input.id = "box" + i;
         input.type = "text";
         input.maxLength = 2;
         input.addEventListener("input", moveCursor);
@@ -43,30 +44,31 @@ function moveCursor(event) {
 
 // ran each time the check button is pressed, process the existing results
 // go to the next line and continue
-function checkGuess() {
+async function checkGuess() {
     var wordLength = document.getElementById("word-length-input").value;
-
-    // create a div for the new entry
-    var lineDiv = document.createElement("div");
-
-    // generate the input boxes
-    for (var i = 0; i < wordLength; i++) {
-        var input = document.createElement("input");
-        input.className = "word-box";
-        input.type = "text";
-        input.maxLength = 1;
-        input.addEventListener("input", moveCursor);
-
-        lineDiv.appendChild(input);
+    var slovo = "";
+    var barvy = "";
+    for(i = 0; i < wordLength; i++) 
+    {
+        slovo = slovo + Array.from(document.getElementById("box" + i).value)[0];
+        barvy = barvy + Array.from(document.getElementById("box" + i).value)[1];
     }
+    console.log(slovo);
+    console.log(barvy);
+    data = {"slovo": slovo, "barvy": barvy};
 
-    var boxContainer = document.getElementById("word-box-container");
-    boxContainer.appendChild(lineDiv);
-
-    // focus on the first box in the new line
-    var firstInput = lineDiv.getElementsByTagName("input")[0];
-    firstInput.focus();
+    for(i = 0; i < wordLength; i++)
+    {
+        document.getElementById("box" + i).value = "";
+    }
+    
+    const response = await fetch("www.solwordle.org", {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data), // body data type must match "Content-Type" header
+      });
 }
-
 // boxes from the default value
 generateBoxes();
