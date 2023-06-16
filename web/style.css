@@ -1,20 +1,16 @@
-/* set the font family and text alignment for the entire page */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
 }
 
-/* style the heading element */
 h1 {
     color: #333;
 }
 
-/* style the container for word length input */
 .word-length {
     margin-bottom: 10px;
 }
 
-/* style the number input for word length */
 .word-length input[type="number"] {
     width: 40px;
     padding: 8px;
@@ -28,13 +24,11 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-/* style the number input when focused */
 .word-length input[type="number"]:focus {
     background-color: #e0e0e0;
     outline: none;
 }
 
-/* style the individual word boxes */
 .word-box {
     display: inline-block;
     width: 30px;
@@ -42,7 +36,7 @@ h1 {
     border: none;
     background-color: #d1d1d1;
     text-align: center;
-    margin: 0 5px; /* adjust the margin as desired */
+    margin: 5px; /* Adjust the margin as desired */
     font-size: 16px;
     color: #333;
     border-radius: 10%;
@@ -50,55 +44,16 @@ h1 {
     transition: background-color 0.3s ease;
 }
 
-/* style the word box when focused */
 .word-box:focus {
     background-color: #a6a6a6;
     outline: none;
 }
 
-/* style the check button */
+
 .button {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
     border: none;
     cursor: pointer;
-}
-
-/* style the container for word boxes */
-#word-box-container {
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: center;
-    align-items: center;
-}
-
-/* style the color picker input */
-.color-picker {
-    width: 40px;
-    margin-top: 5px;
-}
-
-/* style the wrapper for each word box */
-.word-box-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 5px;
-}
-
-/* style the input pair container */
-.input-pair {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 10px;
-}
-
-/* style each line container */
-.line {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px; /* add margin-bottom to create space between lines */
 }

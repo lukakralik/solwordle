@@ -12,15 +12,9 @@
         <input type="number" id="word-length-input" min="2" max="8" step="1" oninput="generateBoxes()">
     </div>
     <div id="word-box-container"></div>
-    <div id="check-button-container">
+    <div>
+        <!-- TODO: call the aws lambda POST method from checkGuess -->
         <button class="button" onclick="checkGuess()">Check</button>
-    </div>    
-
-    <datalist id="color-options">
-        <option>#79B851</option> <!-- Green -->
-        <option>#F3C237</option> <!-- Yellow -->
-        <option>#A4AEC4</option> <!-- Gray -->
-    </datalist>
-
+    </div>
 </body>
 </html>
