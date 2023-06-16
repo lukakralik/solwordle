@@ -11,6 +11,16 @@
         <label for="word-length-input">Word Length:</label>
         <input type="number" id="word-length-input" min="2" max="8" step="1" oninput="generateBoxes()">
     </div>
+	
+	<div class="language-choice">
+		<label for="cars">Language</label>
+		<select name="language" id="lang">
+			<option value="english">EN</option>
+			<option value="german">DE</option>
+		</select>
+	</div>
+	<br>
+
     <div id="word-box-container"></div>
     <div>
         <!-- TODO: call the aws lambda POST method from checkGuess -->
