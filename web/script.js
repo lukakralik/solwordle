@@ -8,7 +8,7 @@ function generateBoxes() {
         var input = document.createElement("input");
         input.className = "word-box";
         input.type = "text";
-        input.maxLength = 1;
+        input.maxLength = 2;
         input.addEventListener("input", moveCursor);
 
         boxContainer.appendChild(input);
@@ -30,7 +30,7 @@ function moveCursor(event) {
             var allInputs = document.getElementsByClassName("word-box");
             allInputs[allInputs.length - 1].focus();
         }
-    } else if (input.value.length === 1) {
+    } else if (input.value.length === 2) {
         // Capitalize the letter
         input.value = input.value.toUpperCase();
 
