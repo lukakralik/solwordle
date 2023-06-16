@@ -1,26 +1,18 @@
-use std::{
-    fs,
-    io::{prelude::*, BufReader},
-    path::Path,
-    env::current_dir,
-    io::stdin,
-};
-use crate::search::*;
+#![feature(decl_macro)]
+#[macro_use] extern crate rocket;
+
+use rocket::ignite;
 
 pub use crate::utils::*;
 pub use crate::search::*;
 pub mod utils;
 pub mod search;
+pub mod routes;
+pub mod models;
 
 fn main() {
-    let data = import_dataset("english", 8);
-    let data2 = data.clone();
-    //println!("{:#?}", data);
-
-    //let res = suitable_sequences(String::from("G*T*"), vec![String::from("A"), String::from("E")], vec![String::from("B")], data);
-    //println!(" res {:?}", res);
-    
+    ignite().mount("/", routes![routes::fitting_sequence]).launch();
     // add testcase for the filter alternative
-    let result = filter_words(data2, "---L----", &['E', 'A', 'O', 'P'], &['S', 'C']);
-    println!("{:#?}", result);
+    //let result = filter_words(data, "---L----", &['E', 'A', 'O', 'P'], &['S', 'C']);
+    //println!("{:#?}", result);
 }

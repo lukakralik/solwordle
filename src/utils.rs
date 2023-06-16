@@ -12,8 +12,8 @@ pub fn import_dataset(lang: &str, des_len: u8) -> Vec<String> {
 
     // Define the path to the data
     let abs_path = match des_len {
-        0 => format!("words/{}.txt", lang),
-        _ => format!("words/{}{}.txt", lang, des_len)
+        0 => format!("{}.txt", lang),
+        _ => format!("{}{}.txt", lang, des_len)
     };
     
     // Initialize file and reader for loading data from the file
