@@ -45,7 +45,7 @@ function moveCursor(event) {
 // ran each time the check button is pressed, process the existing results
 // go to the next line and continue
 async function checkGuess() {
-    var wordLength = document.getElementById("word-length-input").value;
+    var wordLength = +document.getElementById("word-length-input").value;
     var word = "";
     var colors = "";
 	var language = document.getElementById("lang").value;
@@ -58,7 +58,7 @@ async function checkGuess() {
     data = {
 		"word": word,
 		"colors": colors,
-		"len": wordLength,
+		"length": wordLength,
 		"lang": language
 	};
 
@@ -66,14 +66,24 @@ async function checkGuess() {
         document.getElementById("box" + i).value = "";
     }
 
-    const response = await fetch("www.solwordle.org", {
-        method: "POST", // *GET, POST, PUT, DELETE, etc.,
+    const response = await fetch("http://localhost:8000/words", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data), // body data type must match "Content-Type" header
+        body: JSON.stringify(data),
       });
-	document.getElementById("answersparagraph").value = response.body;
+      
+      if (response.ok) {
+        const responseData = await response.json();
+        const words = responseData.words;
+        console.log(words);
+      
+        var result = document.getElementById("answersparagraph");
+        result.innerHTML = words.join(", ");
+      } else {
+        throw new Error('Error:', response.status);
+      }
 }
 
 // boxes from the default value

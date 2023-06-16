@@ -1,19 +1,20 @@
 use rocket::http::Status;
 use rocket_contrib::json::Json;
-use std::env::set_current_dir;
 
+use crate::utils::*;
+use crate::search::*;
 use crate::models::{InputPayload, OutputPayload};
 
 #[post("/words", format = "json", data = "<input>")]
 pub fn fitting_sequence(input: Json<InputPayload>) -> Result<Json<OutputPayload>, Status> {
-    let path_to_words = "../words/";
-    set_current_dir(path_to_words).expect("Failed to set current directory");
 
-    let word = input.word.clone();
-    let colors = input.colors.clone();
+    let data = import_dataset(&input.lang.clone(), input.length.clone());
+    
+    let result = filter_words(data, "---L----", &['E', 'A', 'O', 'P'], &['S', 'C']);
+    println!("{:#?}", result);
 
     let output = OutputPayload {
-        words: vec![word, colors],
+        words: result,
     };
 
     Ok(Json(output))
