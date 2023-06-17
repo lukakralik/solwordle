@@ -9,7 +9,7 @@ pub fn import_dataset(lang: &str, des_len: u8) -> Vec<String> {
     // Convert the lenght u8 into a String
     let len = (des_len + b'0') as char;
 
-    // Define the path to the data
+    // define the path to the data
     let mut abs_path = PathBuf::from(env::current_dir().unwrap());
     abs_path.push("words");
 
@@ -45,4 +45,20 @@ pub fn to_upper(list: Vec<String>) -> Vec<String> {
         *s = s.to_uppercase();
     }
     vec
+}
+
+pub fn set_char_at_index(s: &str, index: usize, c: char) -> String {
+    let mut result = String::from(s);
+
+    if let Some(char_index) = result.char_indices().nth(index) {
+        let byte_index = char_index.0;
+        result.replace_range(byte_index..byte_index + char_index.1.len_utf8(), &c.to_string());
+    }
+
+    result
+}
+
+pub fn create_hyphen_string(length: u8) -> String {
+    let hyphen_string = "-".repeat(length.into());
+    hyphen_string
 }
